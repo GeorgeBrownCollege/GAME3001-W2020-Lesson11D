@@ -11,6 +11,7 @@ enum GameObjectType {
 	CAT,
 	PLAYER,
 	PLANE,
+	EXPLOSION,
 	OBSTACLE,
 	NUM_OF_TYPES
 };

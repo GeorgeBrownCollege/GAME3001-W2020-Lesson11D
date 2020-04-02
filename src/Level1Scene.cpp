@@ -1,5 +1,6 @@
 #include "Level1Scene.h"
 #include "Game.h"
+#include "ExplosionManager.h"
 
 Level1Scene::Level1Scene()
 {
@@ -12,11 +13,13 @@ Level1Scene::~Level1Scene()
 void Level1Scene::draw()
 {
 	drawDisplayList();
+	ExplosionManager::Instance()->draw();
 }
 
 void Level1Scene::update()
 {
 	updateDisplayList();
+	ExplosionManager::Instance()->update();
 }
 
 void Level1Scene::clean()
@@ -46,6 +49,12 @@ void Level1Scene::handleEvents()
 			break;
 		case SDL_MOUSEWHEEL:
 			wheel = event.wheel.y;
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			{
+			auto explosion = ExplosionManager::Instance()->getExplosion();
+			explosion->setPosition(m_mousePosition);
+			}
 			break;
 		case SDL_KEYDOWN:
 			keyPressed = event.key.keysym.sym;
